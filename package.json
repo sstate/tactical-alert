@@ -1,6 +1,6 @@
 {
   "name": "tactical-alert",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A validation library for Flux applications",
   "license": "MIT",
   "main": "src/index.js",
