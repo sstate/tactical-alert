@@ -1,6 +1,6 @@
 {
   "name": "tactical-alert",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A validation library for Flux applications",
   "license": "MIT",
   "main": "src/index.js",
@@ -41,8 +41,6 @@
     ]
   },
   "peerDependencies": {
-    "react": "0.13.x",
-    "flux": "2.1.x",
     "lcars": "1.1.x",
     "cargo-bay": "1.1.x"
   },
