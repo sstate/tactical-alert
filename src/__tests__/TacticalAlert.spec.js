@@ -4,7 +4,8 @@ describe('TacticalAlert', function() {
   'use strict';
 
   var MemoryAlpha;
-  var LCARS;
+  var Dispatcher;
+  var Dispatcher;
   var TacticalAlert;
 
   var validator;
@@ -78,8 +79,8 @@ describe('TacticalAlert', function() {
       });
 
       MemoryAlpha = require('memory-alpha');
-      LCARS = require('lcars');
-      spyOn(LCARS, 'dispatch');
+      Dispatcher = require('welp').WelpDispatcher;
+      spyOn(Dispatcher, 'dispatch');
     });
 
     it('has two function members', function() {
@@ -91,15 +92,14 @@ describe('TacticalAlert', function() {
     describe('isValid function', function() {
       it('runs every validation passed into the Factory on all keys', function() {
         spied_validator.isValid({ one: 1, two: 2 });
-
         expect(validations.isOne).toHaveBeenCalled();
-        expect(validations.isOne.callCount).toEqual(1);
+        expect(validations.isOne.calls.count()).toEqual(1);
 
         expect(validations.isTwo).toHaveBeenCalled();
-        expect(validations.isTwo.callCount).toEqual(1);
+        expect(validations.isTwo.calls.count()).toEqual(1);
 
         expect(validations.isPositive).toHaveBeenCalled();
-        expect(validations.isPositive.callCount).toEqual(2);
+        expect(validations.isPositive.calls.count()).toEqual(2);
       });
 
       it('returns true if all data passes validation', function() {
@@ -114,9 +114,9 @@ describe('TacticalAlert', function() {
         var dispatched_action;
 
         validator.isValid({ one: -2, two: 6 });
-        expect(LCARS.dispatch).toHaveBeenCalled();
+        expect(Dispatcher.dispatch).toHaveBeenCalled();
 
-        dispatched_action = LCARS.dispatch.argsForCall[0][0];
+        dispatched_action = Dispatcher.dispatch.calls.argsFor(0)[0];
         expect(dispatched_action.type).toEqual(MemoryAlpha.ValidationActions.VALIDATION_FAILED);
       });
     });
@@ -126,18 +126,18 @@ describe('TacticalAlert', function() {
         spied_validator.getValidationErrors('one', 1);
 
         expect(validations.isOne).toHaveBeenCalled();
-        expect(validations.isOne.callCount).toEqual(1);
+        expect(validations.isOne.calls.count()).toEqual(1);
 
         expect(validations.isPositive).toHaveBeenCalled();
-        expect(validations.isPositive.callCount).toEqual(1);
+        expect(validations.isPositive.calls.count()).toEqual(1);
 
         expect(validations.isTwo).not.toHaveBeenCalled();
 
 
         spied_validator.getValidationErrors('two', 2);
         expect(validations.isTwo).toHaveBeenCalled();
-        expect(validations.isTwo.callCount).toEqual(1);
-        expect(validations.isPositive.callCount).toEqual(2);
+        expect(validations.isTwo.calls.count()).toEqual(1);
+        expect(validations.isPositive.calls.count()).toEqual(2);
       });
 
       it('does not run validations against undefined input', function() {

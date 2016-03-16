@@ -64,7 +64,7 @@
 'use strict';
 
 var MemoryAlpha = require('memory-alpha');
-var LCARS = require('lcars');
+var Dispatcher = require('welp').WelpDispatcher;
 var merge = require('amp-merge');
 
 var TacticalAlert = function(options) {
@@ -119,7 +119,7 @@ var TacticalAlert = function(options) {
         return true;
       } else {
         // Create an action
-        LCARS.dispatch({
+        Dispatcher.dispatch({
           type: options.validation_failed_action_type,
           options: action_options,
           errors: errors
